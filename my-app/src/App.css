@@ -1,0 +1,38 @@
+.App {
+  
+}
+
+.App-logo {
+  animation: App-logo-spin infinite 20s linear;
+  
+  width:200px;
+  height:300px;
+  
+  
+}
+
+.App-header {
+  background-color: #282c34;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  
+}
+.meta{
+  border: none;
+  background: none;
+  font-size: 30px;
+}
+.opciones{
+  font-size: 15px;
+}
