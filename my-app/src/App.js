@@ -15,10 +15,16 @@ class TodoApp extends React.Component {
       mostrarSubMetas:(texto)=>props.onClick("mostrar",texto),
       quitar: () => props.onClick("quitar",props.value),
       chequear: () => {
+        console.log("check");
+
         this.setState({ done: !this.state.done })
+        console.log("check");
+
         //this.state.done=!this.state.done;  
         if (!this.state.done)
           props.onClick("jump",props.value);
+        else
+        props.onClick("uncheck",props.value);  
       },
       
     }
@@ -162,7 +168,6 @@ class App extends React.Component {
           element["checked"]=!element["checked"];
 
 
-
           
         }else{
           //console.log(typeof(element["lista"])!=="undefined")
@@ -170,7 +175,7 @@ class App extends React.Component {
           //alert("dsfsf")
           element=this.mostrarSubMetasRecursivo(submeta,element) 
         }
-
+          console.log("elemet  paste  ",element);
           metas["lista"][index]=element;
       });
     }
@@ -202,8 +207,8 @@ class App extends React.Component {
   }
 
   actuar(operacion,   dato) {
-    //console.log(dato)
-
+    
+    console.log(dato)
     // para que no fastidie con que reject y resolve no fueron usados 
     
     var a = new Promise((resolve,reject)=>{
@@ -230,7 +235,11 @@ class App extends React.Component {
               this.jump(dato);
               resolve();
               break;
-            
+        case "uncheck":
+              this.chequear(dato);
+              resolve();
+        break;
+              
         default:
           reject();
           break;
@@ -239,7 +248,8 @@ class App extends React.Component {
     })
 
     
-    a.then(()=>this.mandar())
+    a
+    .then(()=>this.mandar())
     
     //operaciones[operacion](dato)
     return;
@@ -277,7 +287,7 @@ class App extends React.Component {
           this.ocultarSubmeta(element["lista"]);
           element["mostrar"]=true;
           this.state.metas.push(element)
-          //console.log(element);
+          console.log(element);
         });
         return this.setState({ metas: this.state.metas })
       })

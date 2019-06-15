@@ -6,7 +6,9 @@ const bodyParser = require('body-parser');
 const path = require('path');
 const fs = require('fs');
 app.use(express.static(path.join(__dirname, 'build')));
-
+app.use(express.static(__dirname+'/img'));
+//app.use("/public",express.static(path.join(__dirname, 'img')));
+//app.use('/static', express.static('public'));
 app.use(bodyParser.json());
 var whitelist = ['http://localhost:8080', 'http://localhost:3000',"http://192.168.1.12:3000","http://192.168.1.12:8080"]
 var corsOptions = {
@@ -81,6 +83,7 @@ app.post('/data', (req, res) => {
 
 app.get('/', (req,res) => {
     //res.send("hola");
+    console.log("peticion get / ",p2);
     res.json(p2);
     //res.sendFile(path.join(__dirname, 'build/index.html'));
 });

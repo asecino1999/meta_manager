@@ -2,9 +2,8 @@
   
 }
 
-.App-logo {
+.App-logo {/*monika  */
   animation: App-logo-spin infinite 20s linear;
-  
   width:200px;
   height:300px;
   
@@ -12,27 +11,64 @@
 }
 
 .App-header {
-  background-color: #282c34;
+  margin: 10%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
   
+  font-size: calc(10px + 2vmin);
 }
+
+
+body{
+  background-color: #282c34;
+}
+
 .meta{
+  color: aliceblue;
   border: none;
   background: none;
   font-size: 30px;
 }
 .opciones{
   font-size: 15px;
+}
+
+.checkInputMeta{
+  content: "\f111";
+    font-size: inherit;
+    width: 1em;
+    color: inherit;
+    outline: none;
+    font-family: "Font Awesome 5 Pro";
+   transition: 300ms ease-out;
+   
+}
+.checkInputMeta :after {
+  display: inline-block;
+  text-align: center;
+  width: 1em;
+}
+.time{
+  color: rgb(117, 132, 144);
+  font-size: 25px;
+}
+.Element{
+  border-color: #a34da3;
+  border-width: 2px;
+  border-style: solid;
+  margin: 5px;
+}
+.opciones{
+  border: #282c34;
+  color: aliceblue;
+  background: #282c34;
+}
+.Edit{
+  border: #282c34;
+  border-width: 0px;
+  font-size: calc(20px );
+  background: #273f37;
+  color: antiquewhite;
+
 }
