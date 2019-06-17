@@ -17,7 +17,8 @@ class Element extends React.Component {
             operationsButton: props.value[0],
             inputOperation: props.value[1],
             showMenu:false,
-            element:props.element
+            element:props.element,
+            showTime:false
         }
     }
     showMenu(){
@@ -43,7 +44,7 @@ class Element extends React.Component {
             
             var value=[this.props.value[0],this.props.value[1]]
             return (<div>
-                    <TimeInfo element={element}></TimeInfo>
+                    
                     <Lista value={value}  
                            lista={element.lista}
                            onClick={(id,dato,operation)=>this.state.action(id,dato,operation)} >
@@ -53,19 +54,30 @@ class Element extends React.Component {
                     )
         }
     }
+    renderTime(){
+        var element=this.props.element;
+        if(this.state.showTime)
+            return(<TimeInfo element={element}></TimeInfo>)
+        else
+            return(<div></div>)
+    }
+
+
     render() {
         var element=this.props.element;
         //duracion=new Date(duracion);
         //duracion=" "+duracion.getHours()+":"+duracion.getMinutes()+":"+duracion.getSeconds();
         return (
             <ul className="Element" >
-                <input className="checkInputMeta" checked={element["check"]}    type="checkbox" onClick={() => this.state.action(element.id, element["check"], "check")} />
+                <input className="checkInputMeta" defaultChecked={element["check"]}    type="checkbox" onClick={() => this.state.action(element.id, element["check"], "check")} />
                 <button className="meta" onClick={() => this.state.action(element.id, element.contenido, "subLista")} >
                     {element["contenido"]+(element["lista"].length>0?"* "+element["lista"].length:"")}
                 </button>
                 
                 <button className="opciones" onClick={()=>this.showMenu()} >opciones</button>
+                <button className="opciones" onClick={()=>{ this.setState({showTime:!this.state.showTime })  }} >showTime</button>
                 {this.renderMenu()}       
+                {this.renderTime()}
                 {this.renderLista()}
             </ul>
         )

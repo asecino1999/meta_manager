@@ -22,11 +22,7 @@ var corsOptions = {
     }
   }
 }
-
- 
-
 var p2;
-
 fs.readFile(__dirname+'/data.json', 'utf8', (err, jsonString) => {
     if (err) {
         console.log("File read failed:", err)
@@ -51,14 +47,9 @@ app.use(cors(corsOptions));
                 {contenido:"que el submenu sea desplegable ",checked:false},
         ]
 }*/
-
-
 app.get('/api/getRequest', (req, res) => {
  //API logic
     res.json(p2);
-
-
-
  }); 
 
 
@@ -67,8 +58,9 @@ app.post('/data', (req, res) => {
     //res.send("hola");
     console.log("recivineod post ");
     const user = (req.body);
+    p2=user;
     const jsonString = JSON.stringify(user)
-    console.log(user);
+    console.log("user",user);
     fs.writeFile(__dirname+'/data.json', jsonString, err => {
         if (err) {
             console.log('Error writing file', err)
@@ -78,6 +70,7 @@ app.post('/data', (req, res) => {
     })
 
     res.json(jsonString);
+
  });
 
 

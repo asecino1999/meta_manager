@@ -4,18 +4,22 @@
 
 .App-logo {/*monika  */
   animation: App-logo-spin infinite 20s linear;
-  width:200px;
-  height:300px;
+  width:10%;
   
+
+  height:auto;
   
+  position: fixed;
+  top:20%;
+  left:2%;
+  
+  z-index: 1001;
 }
 
 .App-header {
-  margin: 10%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
   
+  margin-left: 15%;
+  margin-right: 15%;
   font-size: calc(10px + 2vmin);
 }
 
@@ -71,4 +75,39 @@ body{
   background: #273f37;
   color: antiquewhite;
 
+}
+.frase-principal{
+  color: antiquewhite;
+
+
+}
+
+nav{
+  
+  background: #14151b;
+  width:100%;
+}
+nav ul {
+
+  overflow: hidden;
+  list-style: none;
+}
+
+nav ul li div {
+  float: left;
+  margin: 5px;
+
+}
+.menu-fixed{
+  margin: 0%;
+  padding: 0%;
+  position: fixed;
+  left: 0%;
+  z-index: 1000;
+  top:0;
+}
+.Lista{
+  
+  position: relative;
+  margin-top: 50%;
 }
