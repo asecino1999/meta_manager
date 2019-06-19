@@ -8,7 +8,7 @@ proyecto en hecho en  react
 * la informacion se guarda en un packge json data.js 
 * se les puede dar check y esto accionara un gift 
 * Incluye un servidor encargado de guardar el packge json 
-* Alarma con temporisador  10 min 
+* Alarma (Boton descansar) con temporisador  10 min 
 * barra pegajosa superior 
 * Puntaje aculativo por cada objetivo logrado , se quita si se quita el check 
 ![Captura 1 ](Captura1.png) 
