@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Alarmas</title>
+</head>
+<body>
+	<div id="sono"></div>
+	<p>
+		Indica una hora para sonar la alarma
+		<input type="number" name="" id="hora" min="0" max="23"> : 
+		<input type="number" name="" id="min" min="0" max="59"> : 
+		<input type="number" name="" id="seg" min="0" max="59">
+	</p>
+	<div id="reloj"></div>
+</body>
+
+</html>
+
+
+<style type="text/css">
+#sono {
+    background-color: yellow;
+    text-align:center;
+    padding:10px;
+}
+
+#reloj {
+    background-color: orange;
+    padding:10px;
+}
+</style>
+
+<script>
+setInterval(
+	function()
+	{
+		var f=new Date();
+		
+		// mostramos la hora actual
+		document.getElementById("reloj").innerHTML = "La hora actual es: "+f.getHours()+":"+f.getMinutes()+":"+f.getSeconds();
+
+		// si la hora actual coincide con la hora indicada...
+		if( f.getHours()==document.getElementById("hora").value &&
+			f.getMinutes()==document.getElementById("min").value &&
+			f.getSeconds()==document.getElementById("seg").value
+		)
+		{
+			var audio = new Audio('alarm.mp3');
+
+			// al finalizar el sonido escondemos el mensaje de "Alarma sonando"
+			audio.onended=function(){
+				document.getElementById("sono").innerHTML="";
+			};
+			document.getElementById("sono").innerHTML="<h1>Alarma sonando</h1>";
+			
+			// Iniciamos el sonido
+			audio.play();
+		}
+	},1000
+);
+</script>

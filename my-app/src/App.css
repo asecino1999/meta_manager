@@ -111,3 +111,9 @@ nav ul li div {
   position: relative;
   margin-top: 50%;
 }
+.alarma{
+  background: #1e2029;
+  padding: 15px;
+  border: none;
+  color: aliceblue;
+}

@@ -7,10 +7,12 @@ const path = require('path');
 const fs = require('fs');
 app.use(express.static(path.join(__dirname, 'build')));
 app.use(express.static(__dirname+'/img'));
+app.use(express.static(__dirname+'/Audio'));
 //app.use("/public",express.static(path.join(__dirname, 'img')));
 //app.use('/static', express.static('public'));
 app.use(bodyParser.json());
-var whitelist = ['http://localhost:8080', 'http://localhost:3000',"http://192.168.1.12:3000","http://192.168.1.12:8080"]
+var ip=require("../src/ip");
+var whitelist = ['http://localhost:8080', 'http://localhost:3000',"http://"+ip+":3000","http://"+ip+":8080"]
 var corsOptions = {
   origin: function (origin, callback) {
       console.log(origin)
@@ -34,19 +36,24 @@ fs.readFile(__dirname+'/data.json', 'utf8', (err, jsonString) => {
 })
 // Then pass them to cors:
 app.use(cors(corsOptions));
-/*var p1={
-        lista: [{contenido: "instlar mongodb" ,checked:false },
-                {contenido:"consuktas a a mongo por peticiones de react al api ",checked:false},
-                {contenido:"crear express que se conecte con react",checked:true},
-                {contenido:"menu desplegable ",checked:true,
-                 lista:[// sub menu        
-                        {contenido:"enconrar la manra de crear submenu ", checked:true  },
-                       
-                 ]
-                },
-                {contenido:"que el submenu sea desplegable ",checked:false},
-        ]
-}*/
+/*var p2={// poner esto en caso de que jsonString.length===0   es decir este vacio 
+    "id": 0,
+    "contenido": "",
+    "mostrar": true,
+    "lista": [
+        {
+            "contenido": "cuadro para diferenciar mejor objetivos ",
+            "mostrar": false,
+            "id": 18376227,
+            "lista": [],
+            "fechaInicio": "2019/5/5 21:27:3",
+            "fechaFin": "2019/5/5 22:16:49",
+            "check": true
+        }
+      ],
+      "score":0
+    }
+*/
 app.get('/api/getRequest', (req, res) => {
  //API logic
     res.json(p2);
@@ -76,6 +83,7 @@ app.post('/data', (req, res) => {
 
 app.get('/', (req,res) => {
     //res.send("hola");
+    console.log("responde")
     console.log("peticion get / ",p2);
     res.json(p2);
     //res.sendFile(path.join(__dirname, 'build/index.html'));

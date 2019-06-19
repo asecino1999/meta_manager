@@ -3,13 +3,18 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "child_process": "^1.0.2",
     "cors": "^2.8.5",
+    "ip": "^1.1.5",
+    "os": "^0.1.1",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-scripts": "3.0.1"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "putIp":"sh ip.sh",
+    "server":"node Server/index.js",
+    "start": "npm run putIp   && react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"

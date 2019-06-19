@@ -2,20 +2,36 @@ import React from 'react';
 import SetText from './SetText';
 import Lista from './Lista';
 import './App.css';
+//var exec
+
+//var proces = async () => { exec = await require('child_process').exec; }
+var  ip=require("./ip") ;
+
 class App2 extends React.Component {
     constructor(props) {
         super(props);
+        var ip_port = ip+":8080";
+        console.log("ip ** ",ip_port)
+
         this.state = {
             metas: {
                 lista: [],
-                score:0
+                score: 0
             },
+            alarma: false,
+            audio: null,
+            inter: null,
+            ip_port: ip_port,
             imgscr: "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/ae2f4173-abee-4ffd-951c-1d1b3a514695/dbt0s8q-1d4014fa-49a6-49ba-bb57-566b3daf9197.png/v1/fill/w_744,h_1073,strp/monika_chibi_by_anjasx4d_dbt0s8q-pre.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9MTg0NSIsInBhdGgiOiJcL2ZcL2FlMmY0MTczLWFiZWUtNGZmZC05NTFjLTFkMWIzYTUxNDY5NVwvZGJ0MHM4cS0xZDQwMTRmYS00OWE2LTQ5YmEtYmI1Ny01NjZiM2RhZjkxOTcucG5nIiwid2lkdGgiOiI8PTEyODAifV1dLCJhdWQiOlsidXJuOnNlcnZpY2U6aW1hZ2Uub3BlcmF0aW9ucyJdfQ._FBbd2bBq0GNdXjZBqc4Hc1oA5T1mxTwFVKWf_eXYRw",
             imgNormal: "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/ae2f4173-abee-4ffd-951c-1d1b3a514695/dbt0s8q-1d4014fa-49a6-49ba-bb57-566b3daf9197.png/v1/fill/w_744,h_1073,strp/monika_chibi_by_anjasx4d_dbt0s8q-pre.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9MTg0NSIsInBhdGgiOiJcL2ZcL2FlMmY0MTczLWFiZWUtNGZmZC05NTFjLTFkMWIzYTUxNDY5NVwvZGJ0MHM4cS0xZDQwMTRmYS00OWE2LTQ5YmEtYmI1Ny01NjZiM2RhZjkxOTcucG5nIiwid2lkdGgiOiI8PTEyODAifV1dLCJhdWQiOlsidXJuOnNlcnZpY2U6aW1hZ2Uub3BlcmF0aW9ucyJdfQ._FBbd2bBq0GNdXjZBqc4Hc1oA5T1mxTwFVKWf_eXYRw",
-            imgjump: "http://localhost:8080/monika.gif"//"https://media.tenor.com/images/b8d51686bec3f9920a603a0f44d72023/tenor.gif",
+            imgjump: "http://" + ip_port + "/monika.gif"//"https://media.tenor.com/images/b8d51686bec3f9920a603a0f44d72023/tenor.gif",
         }
-    }
 
+
+
+
+    }
+    
     ocultarSubElement(mother) {
         //console.log("ele mther", mother)
         if (mother["lista"] !== undefined) {
@@ -30,7 +46,7 @@ class App2 extends React.Component {
     }
     // consulta al servidor 
     componentDidMount() {
-        fetch("http://192.168.1.12:8080/")
+        fetch("http://" + this.state.ip_port + "/")
             .then((salida) => {
                 //console.log("salidfad",salida)
                 return (salida.json())
@@ -40,7 +56,7 @@ class App2 extends React.Component {
                 //data["lista"].forEach(element => {
                 this.ocultarSubElement(data)
                 //});
-                if(data["score"]===undefined)data["score"]=0;
+                if (data["score"] === undefined) data["score"] = 0;
                 this.setState({ metas: data });
             })
     }
@@ -124,17 +140,17 @@ class App2 extends React.Component {
         if (mother["check"] === undefined) mother["check"] = true;
         mother["check"] = !mother["check"];
         //if(mother["check"])dato();
-        var defScore=5;
-        var metas = this.state.metas; 
-        metas.score = metas.score+defScore*(mother["check"]?1:-1);
-        
-        
-        this.setState({metas:metas });
+        var defScore = 5;
+        var metas = this.state.metas;
+        metas.score = metas.score + defScore * (mother["check"] ? 1 : -1);
+
+
+        this.setState({ metas: metas });
         //this.state.metas.score+=defScore*(mother["check"]?1:-1 );
         return mother;
     }
     check(id) {
-        var ele = this.buscarYEjecutar(id, this.jump, this.state.metas,(dato, mother, lista, index)=> this.checking(dato, mother, lista, index));
+        var ele = this.buscarYEjecutar(id, this.jump, this.state.metas, (dato, mother, lista, index) => this.checking(dato, mother, lista, index));
         return ele;
     }
 
@@ -161,7 +177,7 @@ class App2 extends React.Component {
     }
 
     mandar() {
-        var url = 'http://localhost:8080/data';
+        var url = 'http://' + this.state.ip_port + '/data';
         var data = this.state.metas;
         console.log("mandando ", data)
         fetch(url, {
@@ -230,9 +246,19 @@ class App2 extends React.Component {
                         </li>
                         <li>
                             <div className="frase-principal" >
-                                {"Puntaje : "+this.state.metas.score}
+                                {"Puntaje : " + this.state.metas.score}
+                            </div>
+
+                        </li>
+
+                        {this.renderAlarma()}
+
+                        <li>
+                            <div id="time" className="frase-principal" >
+                                Resiste
                             </div>
                         </li>
+
                     </ul>
                 </nav>
                 <hr />
@@ -246,6 +272,68 @@ class App2 extends React.Component {
         )
     }
 
+    lanzarTime() {
+        if (!this.state.alarma) {
+            var hora = new Date();
+            hora.setMinutes(hora.getMinutes() + 10)
+            var audio = new Audio('http://' + this.state.ip_port + '/alarm.mp3');
+            alert(hora);
+            var inter = setInterval(
+                () => {
+                    var f = new Date();
+
+                    //console.log("inter")
+                    var tiempoTotal = (hora.getHours() - f.getHours()) + (hora.getMinutes() - f.getMinutes()) * 60 + (hora.getSeconds() - f.getSeconds());
+                    var segundos = tiempoTotal % 60;
+                    var minutos = (tiempoTotal - segundos) / 60;
+                    document.getElementById("time").innerHTML = "timepo restante " + minutos + ":" + segundos;
+                    if (tiempoTotal <= 0) {
+                        clearInterval(inter);
+
+                        audio.addEventListener('ended', () => {
+                            audio.currentTime = 0;
+                            audio.play();
+                        }, false);
+                        audio.play();
+                    }
+
+                }, 1000
+            )
+            this.setState({ inter: inter, audio: audio, alarma: true })
+
+        } else {
+            var audio1 = this.state.audio;
+            var inter1 = this.state.inter;
+            if (audio1 !== null) {
+                audio1.pause();
+                audio1.currentTime = 0;
+            }
+            if (inter1 !== null) {
+                clearInterval(inter1);
+            }
+            document.getElementById("time").innerHTML = "Resiste";
+            this.setState({ audio: audio1, alarma: false });
+
+        }
+    }
+
+    renderAlarma() {
+
+
+
+
+        return (
+            <li>
+
+                <button className="alarma" onClick={() => this.lanzarTime()}>
+                    descansar
+                </button>
+
+            </li>
+
+
+        )
+    }
     render() {
         var buttonOperation = ["quitar", "^", "v"];
         var inputOperation = ["editar", "agregar"];
