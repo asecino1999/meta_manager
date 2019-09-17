@@ -12,8 +12,8 @@
     "react-scripts": "3.0.1"
   },
   "scripts": {
-    "putIp":"sh ip.sh",
-    "server":"node Server/index.js",
+    "putIp": "sh ip.sh",
+    "server": "node Server/index.js",
     "start": "npm run putIp   && react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",

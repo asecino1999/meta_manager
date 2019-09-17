@@ -1,2 +1,2 @@
-var ip = "192.168.1.44";
+var ip = "172.31.23.54";
 module.exports=ip;

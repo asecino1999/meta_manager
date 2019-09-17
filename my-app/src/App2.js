@@ -10,7 +10,7 @@ var  ip=require("./ip") ;
 class App2 extends React.Component {
     constructor(props) {
         super(props);
-        var ip_port = ip+":8080";
+        var ip_port ="ec2-3-15-234-117.us-east-2.compute.amazonaws.com"   // ip+":8080";
         console.log("ip ** ",ip_port)
 
         this.state = {
